@@ -6,11 +6,14 @@ import { auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
 import { Categories } from "./_components/categories"
 
+interface SearchPageProps {
+  searchParams: {
+    title: string;
+    categoryId: string;
+  }
+}
 
-export default async function SearchPage(searchParams: {
-  title?: string,
-  categoryId?: string
-}) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const categories = await db.category.findMany({
     orderBy: {
       name: "asc"
